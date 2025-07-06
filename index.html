@@ -1,364 +1,346 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2022.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    span.s1 {font: 12.0px 'Apple Color Emoji'}
-    span.s2 {font: 12.0px 'Lucida Grande'}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Koon Yu Wong] (Belle)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- 
+    Chosen Palette: Professional Slate & Teal
+    Application Structure Plan: A thematic, single-page application designed to guide the hiring manager through a narrative of competence. It starts with a strong professional summary, then visually breaks down experience into three key pillars relevant to the airline industry: 1) Leadership & Operations (with a quantitative chart and interactive job detail tabs), 2) Airport & Safety Compliance (with a visual, icon-based layout), and 3) Skills & Passion (highlighting unique qualifications). The chart area is now dynamic, switching context based on the selected experience tab, enhancing data exploration.
+    Visualization & Content Choices:
+    - Leadership Chart: Report Info (Team Sizes) -> Goal (Compare Scale) -> Viz (Bar Chart) -> Interaction (Tooltips) -> Justification (Quickly quantifies leadership impact) -> Library (Chart.js).
+    - Productivity Chart: Report Info (Production increase) -> Goal (Show Change) -> Viz (Bar Chart) -> Interaction (Tooltips, appears on specific tab click) -> Justification (Provides specific, data-driven evidence for a key achievement) -> Library (Chart.js).
+    - Leadership Details: Report Info (Job achievements) -> Goal (Explore) -> Viz (Dynamic Text Blocks) -> Interaction (Clickable Tabs triggering text and chart updates) -> Justification (Creates a cohesive, interactive dashboard experience) -> Library (Vanilla JS).
+    - Compliance Section: Report Info (ASIC, Security, Customer Service Experience) -> Goal (Organize & Emphasize) -> Viz (Icon-based Grid Layout) -> Interaction (Subtle hover effects) -> Justification (Visually separates and highlights critical, airport-specific skills) -> Library (HTML/Tailwind).
+    - Passion Section: Report Info (Pilot License) -> Goal (Engage & Differentiate) -> Viz (Styled Card with Icon) -> Interaction (None) -> Justification (Adds a powerful, personal touch that shows genuine interest) -> Library (HTML/Tailwind).
+    CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 320px;
+            width: 100%;
+            max-width: 600px;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 2rem;
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700;
+            color: #334155; /* slate-700 */
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background-color: #0d9488; /* teal-600 */
+        }
+        .icon-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .icon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #0d9488; /* teal-600 */
+            border-bottom-color: #0d9488;
+        }
+        .tab-button {
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tab-button.active {
+            background-color: #0d9488; /* teal-600 */
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+    </style>
 </head>
-<body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;[Koon Yu Wong] (Belle)&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!--<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>Chosen Palette: Professional Slate &amp; Teal</p>
-<p class="p1"><span class="Apple-converted-space">    </span>Application Structure Plan: A thematic, single-page application designed to guide the hiring manager through a narrative of competence. It starts with a strong professional summary, then visually breaks down experience into three key pillars relevant to the airline industry: 1) Leadership &amp; Operations (with a quantitative chart and interactive job detail tabs), 2) Airport &amp; Safety Compliance (with a visual, icon-based layout), and 3) Skills &amp; Passion (highlighting unique qualifications). The chart area is now dynamic, switching context based on the selected experience tab, enhancing data exploration.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>Visualization &amp; Content Choices:</p>
-<p class="p1"><span class="Apple-converted-space">    </span>- Leadership Chart: Report Info (Team Sizes) -&gt; Goal (Compare Scale) -&gt; Viz (Bar Chart) -&gt; Interaction (Tooltips) -&gt; Justification (Quickly quantifies leadership impact) -&gt; Library (Chart.js).</p>
-<p class="p1"><span class="Apple-converted-space">    </span>- Productivity Chart: Report Info (Production increase) -&gt; Goal (Show Change) -&gt; Viz (Bar Chart) -&gt; Interaction (Tooltips, appears on specific tab click) -&gt; Justification (Provides specific, data-driven evidence for a key achievement) -&gt; Library (Chart.js).</p>
-<p class="p1"><span class="Apple-converted-space">    </span>- Leadership Details: Report Info (Job achievements) -&gt; Goal (Explore) -&gt; Viz (Dynamic Text Blocks) -&gt; Interaction (Clickable Tabs triggering text and chart updates) -&gt; Justification (Creates a cohesive, interactive dashboard experience) -&gt; Library (Vanilla JS).</p>
-<p class="p1"><span class="Apple-converted-space">    </span>- Compliance Section: Report Info (ASIC, Security, Customer Service Experience) -&gt; Goal (Organize &amp; Emphasize) -&gt; Viz (Icon-based Grid Layout) -&gt; Interaction (Subtle hover effects) -&gt; Justification (Visually separates and highlights critical, airport-specific skills) -&gt; Library (HTML/Tailwind).</p>
-<p class="p1"><span class="Apple-converted-space">    </span>- Passion Section: Report Info (Pilot License) -&gt; Goal (Engage &amp; Differentiate) -&gt; Viz (Styled Card with Icon) -&gt; Interaction (None) -&gt; Justification (Adds a powerful, personal touch that shows genuine interest) -&gt; Library (HTML/Tailwind).</p>
-<p class="p1"><span class="Apple-converted-space">    </span>CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>html { scroll-behavior: smooth; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Roboto', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f8fafc; /* slate-50 */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.chart-container {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 320px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-width: 600px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.section-title {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding-bottom: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.875rem; /* text-3xl */</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #334155; /* slate-700 */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.section-title::after {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>content: '';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>bottom: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 50%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 3px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #0d9488; /* teal-600 */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.icon-card {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.3s ease, box-shadow 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.icon-card:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-5px);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.nav-link {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: color 0.3s ease, border-color 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 2px solid transparent;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.nav-link:hover, .nav-link.active {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #0d9488; /* teal-600 */</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-bottom-color: #0d9488;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.tab-button {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.tab-button.active {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #0d9488; /* teal-600 */</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body class="text-slate-700"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Sticky Navigation --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;nav class="sticky top-0 bg-white/80 backdrop-blur-sm shadow-md z-50"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-6xl mx-auto px-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex justify-between items-center h-16"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="text-xl font-bold text-slate-800"&gt;[Your Full Name] (Belle)&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="hidden md:flex space-x-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="#leadership" class="nav-link font-medium pb-1"&gt;Leadership &amp; Operations&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="#compliance" class="nav-link font-medium pb-1"&gt;Airport &amp; Safety&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="#skills-passion" class="nav-link font-medium pb-1"&gt;Skills &amp; Passion&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/nav&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Header Section --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;header class="bg-white"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-6xl mx-auto pt-12 pb-16 px-6 text-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-4xl md:text-5xl font-bold text-slate-800 tracking-wide"&gt;[Your Full Name] (Belle)&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="mt-3 text-lg text-teal-600 font-medium"&gt;Operations Leader | Airport Compliance Specialist | Aviation Enthusiast&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Main Content --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;main class="max-w-6xl mx-auto p-6 md:p-10"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Professional Summary Section --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="summary" class="bg-white p-8 rounded-lg shadow-lg mb-16"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 class="text-2xl font-bold text-slate-800 mb-4 text-center"&gt;Professional Summary&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-center text-base md:text-lg leading-relaxed max-w-4xl mx-auto"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>A results-driven Operations Leader with over a decade of success leading large-scale teams (up to 140 staff) in high-pressure environments. Brings five years of direct operational and compliance management experience at &lt;strong&gt;Brisbane International Airport&lt;/strong&gt; and a certified background as a &lt;strong&gt;Health and Safety (H&amp;S) Representative&lt;/strong&gt;. Eager to apply a unique blend of operational expertise, a safety-first mindset, and a deep passion for aviation to the Senior Airport Lead role.</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Key Pillars Section --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="space-y-16"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Pillar 1: Operational Leadership --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="leadership"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="section-title"&gt;Leadership &amp; Operations&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid md:grid-cols-5 gap-8 items-start"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="md:col-span-3 bg-white p-6 rounded-lg shadow-lg"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-bold text-slate-800 mb-4"&gt;Experience Highlights (Click to Switch)&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-wrap gap-2 mb-6 border-b pb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;button class="tab-button active text-sm md:text-base px-3 py-2 rounded-full font-semibold bg-slate-200 text-slate-700" data-target="lite-n-easy"&gt;Lite n' Easy&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;button class="tab-button text-sm md:text-base px-3 py-2 rounded-full font-semibold bg-slate-200 text-slate-700" data-target="coffee-club"&gt;The Coffee Club (BNE)&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;button class="tab-button text-sm md:text-base px-3 py-2 rounded-full font-semibold bg-slate-200 text-slate-700" data-target="metro-group"&gt;Metro Group&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;button class="tab-button text-sm md:text-base px-3 py-2 rounded-full font-semibold bg-slate-200 text-slate-700" data-target="bon-bon"&gt;Bon Bon Bakery&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div id="leadership-details" class="space-y-4 text-base"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;!-- JS will populate this area --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="md:col-span-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div id="visual-panel" class="bg-white p-6 rounded-lg shadow-lg"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 id="visual-title" class="text-xl font-bold text-slate-800 mb-4 text-center"&gt;&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="chart-container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;canvas id="leadershipChart"&gt;&lt;/canvas&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;canvas id="productivityChart"&gt;&lt;/canvas&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Pillar 2: Airport Compliance --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="compliance"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="section-title"&gt;Airport &amp; Safety Compliance&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>&lt;p class="text-center text-base mb-10 max-w-3xl mx-auto"&gt;Five years of frontline experience at Brisbane International Airport has given me a deep, practical understanding of the aviation industry's rigorous safety and compliance standards. My core competencies in this area include:&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid sm:grid-cols-1 md:grid-cols-3 gap-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="bg-white p-6 rounded-lg shadow-lg text-center icon-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="text-5xl text-teal-600 mb-4"&gt;🪪&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-bold text-slate-800 mb-2"&gt;ASIC Management&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;Managed the end-to-end process for Aviation Security Identification Cards for the entire team, ensuring 100% compliance.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="bg-white p-6 rounded-lg shadow-lg text-center icon-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="text-5xl text-teal-600 mb-4"&gt;<span class="s1">📦</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-bold text-slate-800 mb-2"&gt;Security Screening&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;Oversaw all supply chain logistics, guaranteeing adherence to strict airport security screening protocols.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="bg-white p-6 rounded-lg shadow-lg text-center icon-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="text-5xl text-teal-600 mb-4"&gt;<span class="s1">🤝</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-bold text-slate-800 mb-2"&gt;High-Pressure Customer Service&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;Excelled in serving time-sensitive travellers, adeptly handling inquiries and resolving issues to maintain a positive experience.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>&lt;div class="mt-10 text-center bg-teal-50 border-l-4 border-teal-500 text-teal-800 p-6 rounded-r-lg max-w-2xl mx-auto shadow-lg"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="font-bold text-lg"&gt;Key Achievement: Maintained a &lt;span class="text-teal-600"&gt;flawless compliance record&lt;/span&gt; with zero regulatory breaches through rigorous oversight and continuous training.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Pillar 3: Skills &amp; Passion --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">             </span>&lt;section id="skills-passion"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="section-title"&gt;Skills &amp; Passion&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>&lt;div class="grid md:grid-cols-2 gap-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="bg-white p-8 rounded-lg shadow-lg"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                         </span>&lt;h3 class="text-xl font-bold text-slate-800 mb-4"&gt;Professional Certifications&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                         </span>&lt;ul class="space-y-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong class="text-slate-700"&gt;Health and Safety Representative&lt;/strong&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong class="text-slate-700"&gt;First Aid Certificate&lt;/strong&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;Train the Trainer Certificate&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                             </span>&lt;li&gt;Certificate IV in Commercial Cookery&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                         </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                         </span>&lt;h3 class="text-xl font-bold text-slate-800 mt-6 mb-4"&gt;Languages&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                         </span>&lt;p class="text-base"&gt;Fluent in &lt;strong&gt;English, Cantonese, and Mandarin&lt;/strong&gt;.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                     </span>&lt;div class="bg-gradient-to-br from-teal-500 to-cyan-600 text-white p-8 rounded-lg shadow-lg flex flex-col items-center justify-center text-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="text-6xl mb-4"&gt;<span class="s1">✈️</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                         </span>&lt;h3 class="text-2xl font-bold mb-3"&gt;A Genuine Passion for Aviation&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                         </span>&lt;p class="text-base max-w-sm"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>Holding a &lt;strong&gt;Recreational Pilot Licence (20+ hours)&lt;/strong&gt; provides me with a unique, firsthand understanding of operational precision, safety, and teamwork from a flight perspective.</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                     </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Footer --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;footer class="bg-slate-800 text-slate-300 mt-16"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-6xl mx-auto py-8 px-6 text-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;This interactive resume was exclusively designed for the application to Cathay Pacific.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.addEventListener('DOMContentLoaded', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// --- DATA ---</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const leadershipData = {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>'lite-n-easy': {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>title: "Lite n' Easy - Shift Supervisor / H&amp;S Representative",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>points: [</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>"Lead, mentor, and manage a high-performing afternoon shift team of up to &lt;strong&gt;120 employees&lt;/strong&gt;.",</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>"Spearheaded a process optimisation initiative that increased shift production by &lt;strong&gt;more than 25%&lt;/strong&gt;.",</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>"As the designated &lt;strong&gt;Health &amp; Safety Representative&lt;/strong&gt;, implemented safety policies, conducted risk assessments, and led staff training to cultivate a zero-incident culture."</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>]</p>
-<p class="p1"><span class="Apple-converted-space">                </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                </span>'coffee-club': {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>title: "The Coffee Club (BNE Airport) - Chef Manager",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>points: [</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>"Directed all operational aspects within the high-security, access-controlled &lt;strong&gt;airside environment of Brisbane International Airport&lt;/strong&gt;.",</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>"Managed the end-to-end process for &lt;strong&gt;Aviation Security Identification Cards (ASICs)&lt;/strong&gt; for all team members.",</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>"Excelled in providing high-quality customer service to time-sensitive travellers in the high-pressure departure area.",</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>"Achieved and maintained a &lt;strong&gt;flawless compliance record&lt;/strong&gt; with zero regulatory breaches."</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>]</p>
-<p class="p1"><span class="Apple-converted-space">                </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                </span>'metro-group': {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>title: "Metro Group - Site Supervisor / Housekeeping Manager",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>points: [</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>"Successfully managed a large-scale team of &lt;strong&gt;140 housekeeping staff&lt;/strong&gt; within a 405-room hotel.",</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>"Reduced departmental expenses by developing and implementing optimised staff schedules and inventory control systems.",</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>"Directed employee performance evaluations and training programs, resulting in a significant decrease in staff turnover."</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>]</p>
-<p class="p1"><span class="Apple-converted-space">                </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                </span>'bon-bon': {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>title: "Bon Bon Bakery - Store Supervisor",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>points: [</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>"Supervised all day-to-day operations of a busy retail bakery, ensuring exceptional customer service.",</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>"Managed all cash handling and POS transactions with precision, consistently achieving &lt;strong&gt;zero cash shortages or overages&lt;/strong&gt;.",</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>"Trained and mentored new staff on product knowledge and customer service standards."</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>]</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// --- ELEMENTS ---</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const tabsContainer = document.querySelector('.flex.flex-wrap.gap-2');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const detailsContainer = document.getElementById('leadership-details');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const visualTitle = document.getElementById('visual-title');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const leadershipChartCanvas = document.getElementById('leadershipChart');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const productivityChartCanvas = document.getElementById('productivityChart');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>let leadershipChart, productivityChart;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// --- CHART CONFIGS ---</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const leadershipChartConfig = {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>type: 'bar',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>data: {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>labels: ['Metro Group', 'Lite n\' Easy'],</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>datasets: [{</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>label: 'Team Size',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>data: [140, 120],</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>backgroundColor: ['rgba(20, 184, 166, 0.6)', 'rgba(15, 118, 110, 0.7)'],</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>borderColor: ['rgb(13, 148, 136)', 'rgb(15, 118, 110)'],</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>borderWidth: 2,</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>borderRadius: 5,</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>hoverBackgroundColor: 'rgba(13, 148, 136, 0.8)'</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}]</p>
-<p class="p1"><span class="Apple-converted-space">                </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                </span>options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { backgroundColor: '#334155', titleFont: { size: 16, weight: 'bold' }, bodyFont: { size: 14 }, padding: 12, cornerRadius: 6, displayColors: false } }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(203, 213, 225, 0.5)' }, ticks: { color: '#475569', font: { size: 14 } }, title: { display: true, text: 'Number of Employees', color: '#475569', font: { size: 14, weight: 'bold' } } }, x: { grid: { display: false }, ticks: { color: '#334155', font: { size: 16, weight: 'bold' } } } } }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const productivityChartConfig = {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>type: 'bar',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>data: {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>labels: ['Before', 'After'],</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>datasets: [{</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>label: 'Meals per Shift',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>data: [60000, 75000],</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>backgroundColor: ['rgba(245, 158, 11, 0.6)', 'rgba(217, 119, 6, 0.7)'],</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>borderColor: ['rgb(217, 119, 6)', 'rgb(180, 83, 9)'],</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>borderWidth: 2,</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>borderRadius: 5,</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>hoverBackgroundColor: 'rgba(217, 119, 6, 0.8)'</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}]</p>
-<p class="p1"><span class="Apple-converted-space">                </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                </span>options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { backgroundColor: '#334155', titleFont: { size: 16, weight: 'bold' }, bodyFont: { size: 14 }, padding: 12, cornerRadius: 6, displayColors: false } }, scales: { x: { beginAtZero: true, grid: { color: 'rgba(203, 213, 225, 0.5)' }, ticks: { color: '#475569', font: { size: 14 }, callback: function(value) { return value / 1000 + 'k'; } } }, y: { grid: { display: false }, ticks: { color: '#334155', font: { size: 16, weight: 'bold' } } } } }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// --- FUNCTIONS ---</p>
-<p class="p1"><span class="Apple-converted-space">            </span>function updateDetails(targetId) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const data = leadershipData[targetId];</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (!data) return;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>let content = `&lt;h4 class="text-lg font-bold text-teal-700 mb-4"&gt;${data.title}&lt;/h4&gt;&lt;ul class="space-y-3"&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>data.points.forEach(point =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>content += `&lt;li class="flex items-start"&gt;&lt;span class="text-teal-500 font-bold mr-3"&gt;<span class="s2">▪</span>&lt;/span&gt;&lt;div&gt;${point}&lt;/div&gt;&lt;/li&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>});</p>
-<p class="p1"><span class="Apple-converted-space">                </span>content += `&lt;/ul&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>detailsContainer.innerHTML = content;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>function showChart(chartType) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Always destroy both charts to ensure a clean state</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (leadershipChart) {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>leadershipChart.destroy();</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>leadershipChart = null;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (productivityChart) {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>productivityChart.destroy();</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>productivityChart = null;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (chartType === 'productivity') {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>visualTitle.textContent = 'Productivity Gain';</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>leadershipChartCanvas.style.display = 'none';</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>productivityChartCanvas.style.display = 'block';</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>productivityChart = new Chart(productivityChartCanvas.getContext('2d'), productivityChartConfig);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>} else { // Default to leadership</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>visualTitle.textContent = 'Team Management Scale';</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>productivityChartCanvas.style.display = 'none';</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>leadershipChartCanvas.style.display = 'block';</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>leadershipChart = new Chart(leadershipChartCanvas.getContext('2d'), leadershipChartConfig);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// --- EVENT LISTENERS ---</p>
-<p class="p1"><span class="Apple-converted-space">            </span>tabsContainer.addEventListener('click', (e) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (e.target.tagName === 'BUTTON') {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>tabsContainer.querySelectorAll('button').forEach(btn =&gt; btn.classList.remove('active'));</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>e.target.classList.add('active');</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const targetId = e.target.dataset.target;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>updateDetails(targetId);</p>
-<p class="p2"><span class="Apple-converted-space">                    </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (targetId === 'lite-n-easy') {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>showChart('productivity');</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>showChart('leadership');</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// --- INITIAL LOAD ---</p>
-<p class="p1"><span class="Apple-converted-space">            </span>updateDetails('lite-n-easy');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>showChart('productivity'); // Start with productivity chart since Lite n' Easy is the active tab</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+<body class="text-slate-700">
+
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 bg-white/80 backdrop-blur-sm shadow-md z-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center h-16">
+                <div class="text-xl font-bold text-slate-800">[Your Full Name] (Belle)</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#leadership" class="nav-link font-medium pb-1">Leadership & Operations</a>
+                    <a href="#compliance" class="nav-link font-medium pb-1">Airport & Safety</a>
+                    <a href="#skills-passion" class="nav-link font-medium pb-1">Skills & Passion</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-white">
+        <div class="max-w-6xl mx-auto pt-12 pb-16 px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-800 tracking-wide">[Your Full Name] (Belle)</h1>
+            <p class="mt-3 text-lg text-teal-600 font-medium">Operations Leader | Airport Compliance Specialist | Aviation Enthusiast</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto p-6 md:p-10">
+
+        <!-- Professional Summary Section -->
+        <section id="summary" class="bg-white p-8 rounded-lg shadow-lg mb-16">
+            <h3 class="text-2xl font-bold text-slate-800 mb-4 text-center">Professional Summary</h3>
+            <p class="text-center text-base md:text-lg leading-relaxed max-w-4xl mx-auto">
+                A results-driven Operations Leader with over a decade of success leading large-scale teams (up to 140 staff) in high-pressure environments. Brings five years of direct operational and compliance management experience at <strong>Brisbane International Airport</strong> and a certified background as a <strong>Health and Safety (H&S) Representative</strong>. Eager to apply a unique blend of operational expertise, a safety-first mindset, and a deep passion for aviation to the Senior Airport Lead role.
+            </p>
+        </section>
+
+        <!-- Key Pillars Section -->
+        <div class="space-y-16">
+
+            <!-- Pillar 1: Operational Leadership -->
+            <section id="leadership">
+                <h2 class="section-title">Leadership & Operations</h2>
+                <div class="grid md:grid-cols-5 gap-8 items-start">
+                    <div class="md:col-span-3 bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4">Experience Highlights (Click to Switch)</h3>
+                        <div class="flex flex-wrap gap-2 mb-6 border-b pb-4">
+                            <button class="tab-button active text-sm md:text-base px-3 py-2 rounded-full font-semibold bg-slate-200 text-slate-700" data-target="lite-n-easy">Lite n' Easy</button>
+                            <button class="tab-button text-sm md:text-base px-3 py-2 rounded-full font-semibold bg-slate-200 text-slate-700" data-target="coffee-club">The Coffee Club (BNE)</button>
+                            <button class="tab-button text-sm md:text-base px-3 py-2 rounded-full font-semibold bg-slate-200 text-slate-700" data-target="metro-group">Metro Group</button>
+                            <button class="tab-button text-sm md:text-base px-3 py-2 rounded-full font-semibold bg-slate-200 text-slate-700" data-target="bon-bon">Bon Bon Bakery</button>
+                        </div>
+                        <div id="leadership-details" class="space-y-4 text-base">
+                            <!-- JS will populate this area -->
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <div id="visual-panel" class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 id="visual-title" class="text-xl font-bold text-slate-800 mb-4 text-center"></h3>
+                            <div class="chart-container">
+                                <canvas id="leadershipChart"></canvas>
+                                <canvas id="productivityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pillar 2: Airport Compliance -->
+            <section id="compliance">
+                <h2 class="section-title">Airport & Safety Compliance</h2>
+                 <p class="text-center text-base mb-10 max-w-3xl mx-auto">Five years of frontline experience at Brisbane International Airport has given me a deep, practical understanding of the aviation industry's rigorous safety and compliance standards. My core competencies in this area include:</p>
+                <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center icon-card">
+                        <div class="text-5xl text-teal-600 mb-4">🪪</div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">ASIC Management</h3>
+                        <p>Managed the end-to-end process for Aviation Security Identification Cards for the entire team, ensuring 100% compliance.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center icon-card">
+                        <div class="text-5xl text-teal-600 mb-4">📦</div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">Security Screening</h3>
+                        <p>Oversaw all supply chain logistics, guaranteeing adherence to strict airport security screening protocols.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center icon-card">
+                        <div class="text-5xl text-teal-600 mb-4">🤝</div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">High-Pressure Customer Service</h3>
+                        <p>Excelled in serving time-sensitive travellers, adeptly handling inquiries and resolving issues to maintain a positive experience.</p>
+                    </div>
+                </div>
+                 <div class="mt-10 text-center bg-teal-50 border-l-4 border-teal-500 text-teal-800 p-6 rounded-r-lg max-w-2xl mx-auto shadow-lg">
+                    <p class="font-bold text-lg">Key Achievement: Maintained a <span class="text-teal-600">flawless compliance record</span> with zero regulatory breaches through rigorous oversight and continuous training.</p>
+                </div>
+            </section>
+            
+            <!-- Pillar 3: Skills & Passion -->
+             <section id="skills-passion">
+                <h2 class="section-title">Skills & Passion</h2>
+                 <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                         <h3 class="text-xl font-bold text-slate-800 mb-4">Professional Certifications</h3>
+                         <ul class="space-y-3">
+                            <li><strong class="text-slate-700">Health and Safety Representative</strong></li>
+                            <li><strong class="text-slate-700">First Aid Certificate</strong></li>
+                            <li>Train the Trainer Certificate</li>
+                             <li>Certificate IV in Commercial Cookery</li>
+                         </ul>
+                         <h3 class="text-xl font-bold text-slate-800 mt-6 mb-4">Languages</h3>
+                         <p class="text-base">Fluent in <strong>English, Cantonese, and Mandarin</strong>.</p>
+                    </div>
+                     <div class="bg-gradient-to-br from-teal-500 to-cyan-600 text-white p-8 rounded-lg shadow-lg flex flex-col items-center justify-center text-center">
+                        <div class="text-6xl mb-4">✈️</div>
+                         <h3 class="text-2xl font-bold mb-3">A Genuine Passion for Aviation</h3>
+                         <p class="text-base max-w-sm">
+                            Holding a <strong>Recreational Pilot Licence (20+ hours)</strong> provides me with a unique, firsthand understanding of operational precision, safety, and teamwork from a flight perspective.
+                        </p>
+                     </div>
+                 </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-300 mt-16">
+        <div class="max-w-6xl mx-auto py-8 px-6 text-center">
+            <p>This interactive resume was exclusively designed for the application to Cathay Pacific.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DATA ---
+            const leadershipData = {
+                'lite-n-easy': {
+                    title: "Lite n' Easy - Shift Supervisor / H&S Representative",
+                    points: [
+                        "Lead, mentor, and manage a high-performing afternoon shift team of up to <strong>120 employees</strong>.",
+                        "Spearheaded a process optimisation initiative that increased shift production by <strong>more than 25%</strong>.",
+                        "As the designated <strong>Health & Safety Representative</strong>, implemented safety policies, conducted risk assessments, and led staff training to cultivate a zero-incident culture."
+                    ]
+                },
+                'coffee-club': {
+                    title: "The Coffee Club (BNE Airport) - Chef Manager",
+                    points: [
+                        "Directed all operational aspects within the high-security, access-controlled <strong>airside environment of Brisbane International Airport</strong>.",
+                        "Managed the end-to-end process for <strong>Aviation Security Identification Cards (ASICs)</strong> for all team members.",
+                        "Excelled in providing high-quality customer service to time-sensitive travellers in the high-pressure departure area.",
+                        "Achieved and maintained a <strong>flawless compliance record</strong> with zero regulatory breaches."
+                    ]
+                },
+                'metro-group': {
+                    title: "Metro Group - Site Supervisor / Housekeeping Manager",
+                    points: [
+                        "Successfully managed a large-scale team of <strong>140 housekeeping staff</strong> within a 405-room hotel.",
+                        "Reduced departmental expenses by developing and implementing optimised staff schedules and inventory control systems.",
+                        "Directed employee performance evaluations and training programs, resulting in a significant decrease in staff turnover."
+                    ]
+                },
+                'bon-bon': {
+                    title: "Bon Bon Bakery - Store Supervisor",
+                    points: [
+                        "Supervised all day-to-day operations of a busy retail bakery, ensuring exceptional customer service.",
+                        "Managed all cash handling and POS transactions with precision, consistently achieving <strong>zero cash shortages or overages</strong>.",
+                        "Trained and mentored new staff on product knowledge and customer service standards."
+                    ]
+                }
+            };
+
+            // --- ELEMENTS ---
+            const tabsContainer = document.querySelector('.flex.flex-wrap.gap-2');
+            const detailsContainer = document.getElementById('leadership-details');
+            const visualTitle = document.getElementById('visual-title');
+            const leadershipChartCanvas = document.getElementById('leadershipChart');
+            const productivityChartCanvas = document.getElementById('productivityChart');
+            let leadershipChart, productivityChart;
+
+            // --- CHART CONFIGS ---
+            const leadershipChartConfig = {
+                type: 'bar',
+                data: {
+                    labels: ['Metro Group', 'Lite n\' Easy'],
+                    datasets: [{
+                        label: 'Team Size',
+                        data: [140, 120],
+                        backgroundColor: ['rgba(20, 184, 166, 0.6)', 'rgba(15, 118, 110, 0.7)'],
+                        borderColor: ['rgb(13, 148, 136)', 'rgb(15, 118, 110)'],
+                        borderWidth: 2,
+                        borderRadius: 5,
+                        hoverBackgroundColor: 'rgba(13, 148, 136, 0.8)'
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { backgroundColor: '#334155', titleFont: { size: 16, weight: 'bold' }, bodyFont: { size: 14 }, padding: 12, cornerRadius: 6, displayColors: false } }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(203, 213, 225, 0.5)' }, ticks: { color: '#475569', font: { size: 14 } }, title: { display: true, text: 'Number of Employees', color: '#475569', font: { size: 14, weight: 'bold' } } }, x: { grid: { display: false }, ticks: { color: '#334155', font: { size: 16, weight: 'bold' } } } } }
+            };
+            
+            const productivityChartConfig = {
+                type: 'bar',
+                data: {
+                    labels: ['Before', 'After'],
+                    datasets: [{
+                        label: 'Meals per Shift',
+                        data: [60000, 75000],
+                        backgroundColor: ['rgba(245, 158, 11, 0.6)', 'rgba(217, 119, 6, 0.7)'],
+                        borderColor: ['rgb(217, 119, 6)', 'rgb(180, 83, 9)'],
+                        borderWidth: 2,
+                        borderRadius: 5,
+                        hoverBackgroundColor: 'rgba(217, 119, 6, 0.8)'
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { backgroundColor: '#334155', titleFont: { size: 16, weight: 'bold' }, bodyFont: { size: 14 }, padding: 12, cornerRadius: 6, displayColors: false } }, scales: { x: { beginAtZero: true, grid: { color: 'rgba(203, 213, 225, 0.5)' }, ticks: { color: '#475569', font: { size: 14 }, callback: function(value) { return value / 1000 + 'k'; } } }, y: { grid: { display: false }, ticks: { color: '#334155', font: { size: 16, weight: 'bold' } } } } }
+            };
+
+            // --- FUNCTIONS ---
+            function updateDetails(targetId) {
+                const data = leadershipData[targetId];
+                if (!data) return;
+
+                let content = `<h4 class="text-lg font-bold text-teal-700 mb-4">${data.title}</h4><ul class="space-y-3">`;
+                data.points.forEach(point => {
+                    content += `<li class="flex items-start"><span class="text-teal-500 font-bold mr-3">▪</span><div>${point}</div></li>`;
+                });
+                content += `</ul>`;
+                detailsContainer.innerHTML = content;
+            }
+
+            function showChart(chartType) {
+                // Always destroy both charts to ensure a clean state
+                if (leadershipChart) {
+                    leadershipChart.destroy();
+                    leadershipChart = null;
+                }
+                if (productivityChart) {
+                    productivityChart.destroy();
+                    productivityChart = null;
+                }
+
+                if (chartType === 'productivity') {
+                    visualTitle.textContent = 'Productivity Gain';
+                    leadershipChartCanvas.style.display = 'none';
+                    productivityChartCanvas.style.display = 'block';
+                    productivityChart = new Chart(productivityChartCanvas.getContext('2d'), productivityChartConfig);
+                } else { // Default to leadership
+                    visualTitle.textContent = 'Team Management Scale';
+                    productivityChartCanvas.style.display = 'none';
+                    leadershipChartCanvas.style.display = 'block';
+                    leadershipChart = new Chart(leadershipChartCanvas.getContext('2d'), leadershipChartConfig);
+                }
+            }
+
+            // --- EVENT LISTENERS ---
+            tabsContainer.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    tabsContainer.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    const targetId = e.target.dataset.target;
+                    updateDetails(targetId);
+                    
+                    if (targetId === 'lite-n-easy') {
+                        showChart('productivity');
+                    } else {
+                        showChart('leadership');
+                    }
+                }
+            });
+            
+            // --- INITIAL LOAD ---
+            updateDetails('lite-n-easy');
+            showChart('productivity'); // Start with productivity chart since Lite n' Easy is the active tab
+        });
+    </script>
 </body>
 </html>
